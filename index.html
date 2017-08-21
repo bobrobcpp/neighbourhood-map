@@ -30,7 +30,6 @@
       </ul>
 
 
-
     </div>
     </nav>
 
@@ -45,10 +44,11 @@
         <input class="form-control col-sm-9" type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-primary col-sm-3 " type="submit"> Filter </button>
       </form>
-
-            <ul>
-      <li>Second</li>
-      <li>Third</li>
+      <div id="form-list">
+            <ul id="form-list" data-bind="foreach: locationList">
+                <li>
+                    <b data-bind="text: lat"></b>
+                </li>
 
       </ul>
       </nav>
