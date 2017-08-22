@@ -54,7 +54,7 @@ var model = {
 
 
 
-function viewModel(){
+var viewModel =function (){
   var self = this;
 
   self.locationList = ko.observableArray( [] );

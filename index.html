@@ -46,11 +46,11 @@
       </form>
       <div data-bind="with: currentItem">
 
-      <h2 data-bind="text: lat"></h2>
+      <h2 data-bind="text: $data.lat"></h2>
 
-            <ul id="form-list" data-bind="foreach: locationList">
+            <ul id="form-list" data-bind="foreach: $parent.locationList">
                 <li>
-                    <b data-bind="text: name, click: currentItem"></b>
+                    <b data-bind="text: name, click: $root.currentItem"></b>
                 </li>
       </ul>
       </div>
