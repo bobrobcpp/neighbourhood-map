@@ -66,18 +66,6 @@ var viewModel =function (){
 
   self.currentItem = ko.observable(self.locationList()[0]);
 
-
-  // self.getLocationData = function(){
-  //   var getLocationData;
-  //   var baseUrl = "https://api.foursquare.com/v2/venues/search?ll=<latlng>&client_id=NYRK42K0WXYTE2W5YZQYISSRSPI13N40ZNX0VLOOLHDALLM0&client_secret=UJLKHHZUJOIFPXZZYJTQ3UUXCEI1OV4JOSQ1OOTWKIZHWWRX&v=20170821";
-  //   var chosenLoc = self.currentItem;
-  //   var newUrl = baseUrl.replace(/<latlng>/, chosenLoc.lat + "," + chosenLoc.lng);
-  //   console.log(newUrl);
-  // };
-
-
-  // console.log("Current = " + self.currentItem);
-
   }
 
 
@@ -86,12 +74,16 @@ var placeListItem = function(data){
   this.name = "test";
   this.newUrl;
   this.getLocationData = function(){
-  var getLocationData;
-  var baseUrl = "https://api.foursquare.com/v2/venues/search?ll=<latlng>&client_id=NYRK42K0WXYTE2W5YZQYISSRSPI13N40ZNX0VLOOLHDALLM0&client_secret=UJLKHHZUJOIFPXZZYJTQ3UUXCEI1OV4JOSQ1OOTWKIZHWWRX&v=20170821";
-  var chosenLoc = data;
-  newUrl = baseUrl.replace(/<latlng>/, chosenLoc.lat + "," + chosenLoc.lng);
-  console.log(newUrl);
-};
+    var getLocationData;
+    var baseUrl = "https://api.foursquare.com/v2/venues/search?ll=<latlng>&client_id=NYRK42K0WXYTE2W5YZQYISSRSPI13N40ZNX0VLOOLHDALLM0&client_secret=UJLKHHZUJOIFPXZZYJTQ3UUXCEI1OV4JOSQ1OOTWKIZHWWRX&v=20170821";
+    var chosenLoc = data;
+    newUrl = baseUrl.replace(/<latlng>/, chosenLoc.lat + "," + chosenLoc.lng);
+
+    $.getJSON(newUrl, function(){
+      console.log("Success " + newUrl);
+    });
+
+  };
 }
 
 ko.applyBindings(new viewModel());
