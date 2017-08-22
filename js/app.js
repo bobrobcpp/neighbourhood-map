@@ -32,12 +32,6 @@
 
   };
 
-// function getLocationData(index){
-// var baseUrl = "https://api.foursquare.com/v2/venues/search?ll=<latlng>&client_id=NYRK42K0WXYTE2W5YZQYISSRSPI13N40ZNX0VLOOLHDALLM0&client_secret=UJLKHHZUJOIFPXZZYJTQ3UUXCEI1OV4JOSQ1OOTWKIZHWWRX&v=20170821";
-// var chosenLoc = model.locations[index];
-// var newUrl = baseUrl.replace(/<latlng>/, chosenLoc.lat + "," + chosenLoc.lng);
-//   console.log(newUrl)
-// }
 
 var model = {
   locations: [
@@ -81,6 +75,9 @@ var placeListItem = function(data){
 
     $.getJSON(newUrl, function(){
       console.log("Success " + newUrl);
+    })
+    .fail(function() {
+      console.log( "Error in getJSON request, please check URL" );
     });
 
   };
