@@ -20,7 +20,7 @@
           position: model.locations[index],
           map: map,
           draggable: true,
-          title: "Hello London",
+          title: "Hello ",
           label: model.locations[index].name,
           animation: null
         });
@@ -66,33 +66,34 @@ var viewModel =function (){
     data.response.group.results.forEach(function(loc){
       console.log(loc.venue.name + ", Latitude: " + loc.venue.location.lat + ", Longitude: " + loc.venue.location.lng);
 // self.locationList.push(new placeListItem(loc.venue));
-      this. test = new placeListItem(loc.venue);
+      this.test = new placeListItem(loc.venue);
       dataModel.locations.push({name: this.test.name});
       // dataModel.locations.push(new placeListItem(loc.venue));
     });
     dataModel.locations.forEach(function(boc){
       self.locationList.push(new placeListItem(boc));
     });
+
   })
   .fail(function() {
     console.log( "Error in bigUrl request, please check URL" );
   });
 
 //Shouldn't be required
-      model.locations.forEach(function(coc){
-        self.locationTest.push(new placeListItem(coc));
-      });
+      // model.locations.forEach(function(coc){
+      //   self.locationTest.push(new placeListItem(coc));
+      // });
 
-    // self.currentItem = ko.observable(self.locationList()[0]);
+    self.currentItem = ko.observable(self.locationList()[0]);
 // Should be bound to locationList above!
-  self.currentItem = ko.observable(self.locationTest()[0]);
+  // self.currentItem = ko.observable(self.locationTest()[0]);
 
   }
 
 
 var placeListItem = function(data){
   this.lat = ko.observable(data.lat);
-  this.lat = ko.observable(data.lng);
+  this.lng = ko.observable(data.lng);
 
   // this.lat = ko.observable(data.location.lat);
   // this.lng = ko.observable(data.location.lng);

@@ -44,11 +44,11 @@
         <input class="form-control col-sm-9" type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-primary col-sm-3 " type="submit"> Filter </button>
       </form>
-      <div data-bind="with: currentItem">
+      <div>
 
 <!--       <h2 data-bind="text: $data.lat, click: getLocationData"></h2> -->
 
-            <ul id="form-list" data-bind="foreach: $parent.locationList">
+            <ul id="form-list" data-bind="foreach: $root.locationList">
                 <li>
                     <b data-bind="text: name(), click: $root.currentItem"></b>
                 </li>
