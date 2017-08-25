@@ -65,13 +65,12 @@ var viewModel =function (){
     console.log(self.bigUrl);
     data.response.group.results.forEach(function(loc){
       console.log(loc.venue.name + ", Latitude: " + loc.venue.location.lat + ", Longitude: " + loc.venue.location.lng);
-// self.locationList.push(new placeListItem(loc.venue));
       this.test = new placeListItem(loc.venue);
-      dataModel.locations.push({name: this.test.name});
-      // dataModel.locations.push(new placeListItem(loc.venue));
+      dataModel.locations.push({name: this.test.name, lat: this.test.lat, lng: this.test.lng, getLocationData: this.test.getLocationData});
     });
     dataModel.locations.forEach(function(boc){
-      self.locationList.push(new placeListItem(boc));
+      // self.locationList.push(new placeListItem(boc));
+      self.locationList.push(boc);
     });
 
   })
@@ -79,24 +78,17 @@ var viewModel =function (){
     console.log( "Error in bigUrl request, please check URL" );
   });
 
-//Shouldn't be required
-      // model.locations.forEach(function(coc){
-      //   self.locationTest.push(new placeListItem(coc));
-      // });
 
     self.currentItem = ko.observable(self.locationList()[0]);
-// Should be bound to locationList above!
-  // self.currentItem = ko.observable(self.locationTest()[0]);
-
   }
 
 
 var placeListItem = function(data){
-  this.lat = ko.observable(data.lat);
-  this.lng = ko.observable(data.lng);
+  // this.lat = ko.observable(data.lat);
+  // this.lng = ko.observable(data.lng);
 
-  // this.lat = ko.observable(data.location.lat);
-  // this.lng = ko.observable(data.location.lng);
+  this.lat = ko.observable(data.location.lat);
+  this.lng = ko.observable(data.location.lng);
   this.name = ko.observable(data.name);
   this.newUrl;
 
