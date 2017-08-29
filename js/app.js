@@ -1,58 +1,13 @@
-//Google maps code
-
-  var map;
-  var marker;
-  function toggleBounce() {
-    if (this.getAnimation() !== null) {
-      this.setAnimation(null);
-    } else {
-      this.setAnimation(google.maps.Animation.BOUNCE);
-    }
-  }
-
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: model.locations[0],
-        zoom: 13,
-    });
-      model.locations.forEach(function(loc, index, array){
-        mark = new google.maps.Marker({
-          position: model.locations[index],
-          map: map,
-          draggable: true,
-          title: "Hello ",
-          label: model.locations[index].name,
-          animation: null
-        });
-        mark.addListener('click', toggleBounce);
 
 
-      });
 
 
-  };
-// end of google maps code
-
-
-//Data model shouldn't be used
-var model = {
-  locations: [
-   {lat: 51.507351, lng: -0.127758, name: "1"},
-   {lat: 51.500175, lng: -0.133233, name: "2"},
-   {lat: 51.500729, lng: -0.124625, name: "3"},
-   {lat: 51.513845, lng: -0.098351, name: "4"},
-   {lat: 51.519413, lng: -0.126957, name: "5"},
-   {lat: 51.513614, lng: -0.136549, name: "6"},
-   {lat: 51.511894, lng: -0.159366, name: "7"},
-   {lat: 51.5299092, lng: -0.1860307, name: "8"}
-   ]
-}
 
 
 //Actual data model
 var dataModel = {
   locations: []
-}
+};
 
 
 // viewModel
@@ -66,12 +21,16 @@ var viewModel =function (){
     data.response.group.results.forEach(function(loc){
       console.log(loc.venue.name + ", Latitude: " + loc.venue.location.lat + ", Longitude: " + loc.venue.location.lng);
       this.test = new placeListItem(loc.venue);
-      dataModel.locations.push({name: this.test.name, lat: this.test.lat, lng: this.test.lng, getLocationData: this.test.getLocationData});
+      dataModel.locations.push({lat: this.test.lat, lng: this.test.lng, name: this.test.name,  getLocationData: this.test.getLocationData});
     });
     dataModel.locations.forEach(function(boc){
       // self.locationList.push(new placeListItem(boc));
       self.locationList.push(boc);
+          placeMarker();
     });
+
+  })
+  .then(function() {
 
   })
   .fail(function() {
@@ -80,7 +39,7 @@ var viewModel =function (){
 
 
     self.currentItem = ko.observable(self.locationList()[0]);
-  }
+  };
 
 
 var placeListItem = function(data){
@@ -90,7 +49,7 @@ var placeListItem = function(data){
   this.lat = ko.observable(data.location.lat);
   this.lng = ko.observable(data.location.lng);
   this.name = ko.observable(data.name);
-  this.newUrl;
+  this.newUrl = null;
 
 
   this.getLocationData = function(){
@@ -110,7 +69,68 @@ var placeListItem = function(data){
       console.log( "Error in getJSON request, please check URL" );
     });
 
-  }
-}
+  };
+};
 
 ko.applyBindings(new viewModel());
+
+
+
+
+//Google maps code
+
+  var map;
+  var marker;
+  function toggleBounce() {
+    if (this.getAnimation() !== null) {
+      this.setAnimation(null);
+    } else {
+      this.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: model.locations[0],
+        zoom: 13,
+    });
+
+  }
+
+
+  function placeMarker() {
+    var latlngbounds = new google.maps.LatLngBounds();
+      dataModel.locations.forEach(function(loc, index, array){
+        var myLatLng = new google.maps.LatLng(loc.lat(), loc.lng());
+        latlngbounds.extend(myLatLng);
+        mark = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          draggable: true,
+          title: "1",
+          label: (index+1).toString(),
+          animation: null
+        });
+        mark.addListener('click', toggleBounce);
+      });
+      map.fitBounds(latlngbounds);
+          }
+// end of google maps code
+
+//Data model shouldn't be used
+var model = {
+  locations: [
+   {lat: 51.507351, lng: -0.127758, name: "1"},
+   {lat: 51.500175, lng: -0.133233, name: "2"},
+   {lat: 51.500729, lng: -0.124625, name: "3"},
+   {lat: 51.513845, lng: -0.098351, name: "4"},
+   {lat: 51.519413, lng: -0.126957, name: "5"},
+   {lat: 51.513614, lng: -0.136549, name: "6"},
+   {lat: 51.511894, lng: -0.159366, name: "7"},
+   {lat: 51.5299092, lng: -0.1860307, name: "8"}
+   ]
+};
+
+
+
+
