@@ -26,8 +26,8 @@ var viewModel =function (){
     dataModel.locations.forEach(function(boc){
       // self.locationList.push(new placeListItem(boc));
       self.locationList.push(boc);
-          placeMarker();
     });
+    placeMarker();
 
   })
   .then(function() {
@@ -90,6 +90,7 @@ ko.applyBindings(new viewModel());
   }
 
   function initMap() {
+
     map = new google.maps.Map(document.getElementById('map'), {
         center: model.locations[0],
         zoom: 13,
@@ -99,6 +100,7 @@ ko.applyBindings(new viewModel());
 
 
   function placeMarker() {
+      var infowindow = new google.maps.InfoWindow();
     var latlngbounds = new google.maps.LatLngBounds();
       dataModel.locations.forEach(function(loc, index, array){
         var myLatLng = new google.maps.LatLng(loc.lat(), loc.lng());
@@ -111,8 +113,17 @@ ko.applyBindings(new viewModel());
           label: (index+1).toString(),
           animation: null
         });
-        mark.addListener('click', toggleBounce);
+        // mark.addListener('click', toggleBounce);
+              mark.addListener('click', function(){
+          infowindow.close(); // Close previously opened infowindow
+          infowindow.setContent((myLatLng).toString());
+          infowindow.open(map, this);
+        });
+
+
+
       });
+
       map.fitBounds(latlngbounds);
           }
 // end of google maps code
