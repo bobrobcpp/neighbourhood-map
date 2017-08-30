@@ -45,14 +45,11 @@
         <button class="btn btn-primary col-sm-3 " type="submit"> Filter </button>
       </form>
       <div>
-      <div data-bind="with :currentItem">
-      <p data-bind="text: $data.name(), click: $data.getLocationData()"></p>
-      </div>
 
-            <ul id="form-list" data-bind="foreach: $root.locationList">
-                <li>
-                    <b data-bind="text: name(), click: $root.currentItem"></b>
-                </li>
+       <ul id="form-list" data-bind="foreach: $root.locationList">
+          <li>
+              <b data-bind="text: name(), click: $data.getLocationData"></b>
+          </li>
       </ul>
       </div>
       </nav>

@@ -37,7 +37,7 @@ var viewModel =function (){
     self.currentItem = ko.observable(self.locationList()[0]);
   };
 
-
+//TO do check if all these things need to be ko.observables
 var placeListItem = function(data){
   var that = this;
   this.lat = ko.observable(data.location.lat);
