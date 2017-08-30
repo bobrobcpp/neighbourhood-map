@@ -1,9 +1,5 @@
 
 
-
-
-
-
 //Actual data model
 var dataModel = {
   locations: []
@@ -21,10 +17,9 @@ var viewModel =function (){
     data.response.group.results.forEach(function(loc){
       console.log(loc.venue.name + ", Latitude: " + loc.venue.location.lat + ", Longitude: " + loc.venue.location.lng);
       this.test = new placeListItem(loc.venue);
-      dataModel.locations.push({lat: this.test.lat, lng: this.test.lng, name: this.test.name,  getLocationData: this.test.getLocationData});
+      dataModel.locations.push({lat: this.test.lat, lng: this.test.lng, name: this.test.name, getLocationData: this.test.getLocationData, rating: this.test.rating, checkins: this.test.checkins, formattedAddress: [this.test.formattedAddress]});
     });
     dataModel.locations.forEach(function(boc){
-      // self.locationList.push(new placeListItem(boc));
       self.locationList.push(boc);
     });
     placeMarker();
@@ -43,25 +38,23 @@ var viewModel =function (){
 
 
 var placeListItem = function(data){
-  // this.lat = ko.observable(data.lat);
-  // this.lng = ko.observable(data.lng);
-
   this.lat = ko.observable(data.location.lat);
   this.lng = ko.observable(data.location.lng);
   this.name = ko.observable(data.name);
   this.newUrl = null;
-
+  this.formattedAddress = ko.observableArray([data.location.formattedAddress]);
+  this.rating = ko.observable(data.rating);
+  this.checkins = ko.observable(data.stats.checkinsCount);
 
   this.getLocationData = function(){
     var getLocationData;
-    var baseUrl = "https://api.foursquare.com/v2/venues/explore?ll=<latlng>&limit=4&section=sights&venuePhotos=1&client_id=NYRK42K0WXYTE2W5YZQYISSRSPI13N40ZNX0VLOOLHDALLM0&client_secret=UJLKHHZUJOIFPXZZYJTQ3UUXCEI1OV4JOSQ1OOTWKIZHWWRX&v=20170821";
+    var baseUrl = "https://api.foursquare.com/v2/venues/explore?ll=<latlng>&radius=10&limit=4&section=sights&venuePhotos=1&client_id=NYRK42K0WXYTE2W5YZQYISSRSPI13N40ZNX0VLOOLHDALLM0&client_secret=UJLKHHZUJOIFPXZZYJTQ3UUXCEI1OV4JOSQ1OOTWKIZHWWRX&v=20170821";
     var chosenLoc = data;
     newUrl = baseUrl.replace(/<latlng>/, chosenLoc.location.lat + "," + chosenLoc.location.lng);
     console.log("New url = " + newUrl);
 
     $.getJSON(newUrl, function(data){
       console.log(newUrl);
-      // console.log("Success " + data.response.venues[0].name);
       console.log("Success " + data.response.groups[0].items[0].venue.name);
 
     })
@@ -82,17 +75,22 @@ ko.applyBindings(new viewModel());
   var map;
   var marker;
   function toggleBounce() {
+    var that = this;
     if (this.getAnimation() !== null) {
       this.setAnimation(null);
     } else {
-      this.setAnimation(google.maps.Animation.BOUNCE);
+
+this.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function(){
+              that.setAnimation(null);
+      },2000);
     }
   }
 
   function initMap() {
-
+    var startCoord = {lat:51.507351, lng: -0.127758};
     map = new google.maps.Map(document.getElementById('map'), {
-        center: model.locations[0],
+        center: startCoord,
         zoom: 13,
     });
 
@@ -109,18 +107,24 @@ ko.applyBindings(new viewModel());
           position: myLatLng,
           map: map,
           draggable: true,
-          title: "1",
           label: (index+1).toString(),
           animation: null
         });
-        // mark.addListener('click', toggleBounce);
-              mark.addListener('click', function(){
-          infowindow.close(); // Close previously opened infowindow
-          infowindow.setContent((myLatLng).toString());
+
+
+
+        mark.addListener('click', toggleBounce);
+        mark.addListener('click', function(){
+        var contentString = "<h4>" + (loc.name()).toString() + "</h4><br><h5> Address: </h5><div id='info-window'>";
+        for (i = 0; i < loc.formattedAddress[0]()[0].length; i ++){
+          // console.log(loc.formattedAddress[0]()[i]);
+          contentString += ("<p>" + loc.formattedAddress[0]()[0][i] + "<br> </p>");
+        }
+        contentString += "</div>";
+          infowindow.close();
+          infowindow.setContent(contentString);
           infowindow.open(map, this);
         });
-
-
 
       });
 
@@ -128,19 +132,6 @@ ko.applyBindings(new viewModel());
           }
 // end of google maps code
 
-//Data model shouldn't be used
-var model = {
-  locations: [
-   {lat: 51.507351, lng: -0.127758, name: "1"},
-   {lat: 51.500175, lng: -0.133233, name: "2"},
-   {lat: 51.500729, lng: -0.124625, name: "3"},
-   {lat: 51.513845, lng: -0.098351, name: "4"},
-   {lat: 51.519413, lng: -0.126957, name: "5"},
-   {lat: 51.513614, lng: -0.136549, name: "6"},
-   {lat: 51.511894, lng: -0.159366, name: "7"},
-   {lat: 51.5299092, lng: -0.1860307, name: "8"}
-   ]
-};
 
 
 

@@ -9,10 +9,18 @@ html, body {
   width : 100%;
 }
 
-body{
+body {
   padding-top: 56px;
 }
 
-ul{
+ul {
   color: white;
+}
+
+#info-window {
+  font-size: 1em;
+}
+
+h4 {
+  display: block;
 }
