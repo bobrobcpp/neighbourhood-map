@@ -17,7 +17,7 @@ var viewModel =function (){
     data.response.group.results.forEach(function(loc){
       console.log(loc.venue.name + ", Latitude: " + loc.venue.location.lat + ", Longitude: " + loc.venue.location.lng);
       this.test = new placeListItem(loc.venue);
-      dataModel.locations.push({lat: this.test.lat, lng: this.test.lng, name: this.test.name, getLocationData: this.test.getLocationData, rating: this.test.rating, checkins: this.test.checkins, formattedAddress: [this.test.formattedAddress]});
+      dataModel.locations.push({lat: this.test.lat, lng: this.test.lng, name: this.test.name, getLocationData: this.test.getLocationData, rating: this.test.rating, checkins: this.test.checkins, formattedAddress: [this.test.formattedAddress], mark: this.test.mark});
     });
     dataModel.locations.forEach(function(boc){
       self.locationList.push(boc);
@@ -45,6 +45,15 @@ var placeListItem = function(data){
   this.formattedAddress = ko.observableArray([data.location.formattedAddress]);
   this.rating = ko.observable(data.rating);
   this.checkins = ko.observable(data.stats.checkinsCount);
+  var theLatLng = new google.maps.LatLng(this.lat(), this.lng());
+  this.mark = new google.maps.Marker({
+          position: theLatLng,
+          map: map,
+          draggable: true,
+          // label: (index+1).toString(),
+          animation: null
+        });
+
 
   this.getLocationData = function(){
     var getLocationData;
@@ -73,7 +82,6 @@ ko.applyBindings(new viewModel());
 //Google maps code
 
   var map;
-  var marker;
   function toggleBounce() {
     var that = this;
     if (this.getAnimation() !== null) {
@@ -103,21 +111,12 @@ this.setAnimation(google.maps.Animation.BOUNCE);
       dataModel.locations.forEach(function(loc, index, array){
         var myLatLng = new google.maps.LatLng(loc.lat(), loc.lng());
         latlngbounds.extend(myLatLng);
-        mark = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          draggable: true,
-          label: (index+1).toString(),
-          animation: null
-        });
 
-
-
+        var mark = loc.mark;
         mark.addListener('click', toggleBounce);
         mark.addListener('click', function(){
         var contentString = "<h4>" + (loc.name()).toString() + "</h4><br><h5> Address: </h5><div id='info-window'>";
         for (i = 0; i < loc.formattedAddress[0]()[0].length; i ++){
-          // console.log(loc.formattedAddress[0]()[i]);
           contentString += ("<p>" + loc.formattedAddress[0]()[0][i] + "<br> </p>");
         }
         contentString += "</div>";
