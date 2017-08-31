@@ -99,8 +99,12 @@ ko.applyBindings(new viewModel());
 
 
 function showInfo(data){
+  if(infowindow){
+      infowindow.close();
+    }
     var infowindow = new google.maps.InfoWindow();
-    infowindow.close();
+
+
     infowindow.setContent(data.infoContent());
     infowindow.open(map, data.mark);
     data.mark.toggleBounce();
