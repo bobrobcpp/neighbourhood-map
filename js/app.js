@@ -95,16 +95,15 @@ ko.applyBindings(new viewModel());
         zoom: 13,
     });
 
+
   }
 
-
-function showInfo(data){
-  if(infowindow){
+var infowindow;
+    function showInfo(data){
+    if(infowindow){
       infowindow.close();
     }
-    var infowindow = new google.maps.InfoWindow();
-
-
+    infowindow = new google.maps.InfoWindow();
     infowindow.setContent(data.infoContent());
     infowindow.open(map, data.mark);
     data.mark.toggleBounce();
