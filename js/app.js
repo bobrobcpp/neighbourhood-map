@@ -17,8 +17,13 @@ var viewModel =function (){
         if(!self.filterText) {
             return self.locationList();
         } else {
-          // return self.locationList();
             return ko.utils.arrayFilter(self.locationList(), function(item) {
+              if(item.name().toLowerCase().indexOf((self.filterText().toLowerCase())) > -1){
+                item.mark.setVisible(true);
+              } else {
+                item.mark.setVisible(false);
+              }
+
                 return (item.name().toLowerCase().indexOf((self.filterText().toLowerCase())) > -1);
 
             });
@@ -35,7 +40,7 @@ var viewModel =function (){
     self.locationList().forEach(function(rec){
       dataModel.locations.push(rec);
     });
-    placeMarker(self.locationList());
+    placeMarker(self.filteredList());
 
 
 
@@ -135,14 +140,6 @@ var infowindow;
         var mark = loc.mark;
         mark.addListener('click', function(){
           showInfo(loc);
-        // var contentString = "<h4>" + (loc.name()).toString() + "</h4><br><h5> Address: </h5><div id='info-window'>";
-        // for (i = 0; i < loc.formattedAddress[0]()[0].length; i ++){
-        //   contentString += ("<p>" + loc.formattedAddress[0]()[0][i] + "<br> </p>");
-        // }
-        // contentString += "</div>";
-        //   infowindow.close();
-        //   infowindow.setContent(contentString);
-        //   infowindow.open(map, this);
         });
 
       });
