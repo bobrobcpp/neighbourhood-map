@@ -19,30 +19,22 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 
       <a class="navbar-brand" href="#">Location Finder</a>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li>
-     <button class="navbar-toggle bg-dark justify-content-end" type="button" aria-expanded="false" aria-label="Toggle navigation">
+     <button class="navbar-toggle bg-dark justify-content-end" type="button" aria-expanded="false" aria-label="Toggle navigation" onclick="listHide()">
       <span class="navbar-toggler-icon"></span>
     </button>
-    </li>
-      </ul>
 
-
-    </div>
     </nav>
 
 
 
   <div class="container-fluid">
     <div class="row">
-      <nav class="col-md-3 bg-dark">
+      <nav class="col-md-3 bg-dark" id="listBox">
 
 
         <form class="form-inline">
-        <input class="form-control col-sm-9" type="text" placeholder="Enter Text Here" aria-label="Search" data-bind="textInput: filterText">
-        <button class="btn btn-primary col-sm-3 " type="submit"> Filter </button>
+        <input class="form-control col-sm-9" type="text" placeholder="Filter Locations" aria-label="Search" data-bind="textInput: filterText">
+        <button class="btn btn-primary col-sm-3 " type="submit">  Reset </button>
       </form>
       <div>
 <h2 data-bind="text: filterText"></h2>
