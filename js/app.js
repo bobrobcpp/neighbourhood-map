@@ -10,7 +10,20 @@ var dataModel = {
 var viewModel =function (){
   var self = this;
 
+  self.filterText = ko.observable("");
+
   self.locationList = ko.observableArray( [] );
+        self.filteredList = ko.computed(function() {
+        if(!self.filterText) {
+            return self.locationList();
+        } else {
+          // return self.locationList();
+            return ko.utils.arrayFilter(self.locationList(), function(item) {
+                return (item.name().toLowerCase().indexOf((self.filterText().toLowerCase())) > -1);
+
+            });
+        }
+    });
   self.bigUrl = "https://api.foursquare.com/v2/search/recommendations?locale=en&explicit-lang=false&v=20170821&m=foursquare&query=Historic+Site&mode=url&radius=1000&ll=51.507351,-0.127758&limit=10&client_id=NYRK42K0WXYTE2W5YZQYISSRSPI13N40ZNX0VLOOLHDALLM0&client_secret=UJLKHHZUJOIFPXZZYJTQ3UUXCEI1OV4JOSQ1OOTWKIZHWWRX&v=20170821";
   $.getJSON(self.bigUrl, function(data){
     console.log(self.bigUrl);
@@ -23,6 +36,9 @@ var viewModel =function (){
       dataModel.locations.push(rec);
     });
     placeMarker(self.locationList());
+
+
+
 
   })
   .then(function() {
