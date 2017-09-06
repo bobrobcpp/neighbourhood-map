@@ -39,8 +39,8 @@
       <div>
 <h2 data-bind="text: filterText"></h2>
        <ul id="form-list" data-bind="foreach: $root.filteredList">
-          <li>
-              <b data-bind="text: name(), click: showInfo"></b>
+          <li data-bind= "click: showInfo">
+              <b data-bind="text: name()"></b>
           </li>
       </ul>
       </div>

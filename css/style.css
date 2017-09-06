@@ -24,3 +24,13 @@ ul {
 h4 {
   display: block;
 }
+
+ul {
+  list-style: none;
+  padding: 0px;
+}
+
+li {
+  border-bottom-style: solid;
+  padding-bottom: 0.6em;
+}
