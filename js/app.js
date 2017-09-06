@@ -51,7 +51,7 @@ var viewModel =function (){
 
   })
   .fail(function() {
-    console.log( "Error in bigUrl request, please check URL" );
+    alert( "Error in foursquare API request, please check site status" );
   });
 
 
@@ -148,5 +148,7 @@ var infowindow;
           }
 // end of google maps code
 
-
+function googleError(){
+  alert("Error in initialisation of google maps, please try reloading the page");
+}
 
