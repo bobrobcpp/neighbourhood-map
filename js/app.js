@@ -153,13 +153,8 @@ function googleError(){
 }
 
 function listHide(){
-  // if ( $('#listBox').css('visibility') == 'hidden' )
-  //   $('#listBox').css('visibility','visible');
-  // else
-  //   $('#listBox').css('visibility','hidden');
-
   $('#listBox').toggleClass("collapse");
   $('#map').toggleClass("col-md-12");
-
+  google.maps.event.trigger(map, "resize");
 }
 
