@@ -4,6 +4,10 @@ html, body {
   padding: 0;
 }
 
+  nav {
+  font-family: 'Cinzel', serif;
+  }
+
 #map {
   height: 630px;
   width : 100%;
@@ -31,6 +35,29 @@ ul {
 }
 
 li {
+  border-width: thin;
   border-bottom-style: solid;
   padding-bottom: 0.6em;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+}
+
+li:hover {
+  background-color: gray;
+}
+
+i {
+  color: white;
+  padding:5px;
+}
+
+.fa{
+  color: white;
+}
+
+.svg-holder {
+  box-sizing: inherit;
+  display: inline-block;
+  height: 50px;
+  width: 50px;
 }
