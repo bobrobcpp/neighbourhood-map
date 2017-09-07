@@ -19,12 +19,12 @@
   <body>
 
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <i class="fa fa-foursquare fa-2x" aria-hidden="true"></i>
-      <a class="navbar-brand" href="#">Explore London</a>
+<!--     <i class="fa fa-foursquare fa-2x" aria-hidden="true"></i> -->
+      <a class="navbar-brand" id="title" href="#">Explore London</a>
      <button class="navbar-toggle bg-dark justify-content-end" type="button" aria-expanded="false" aria-label="Toggle navigation" onclick="listHide()">
      <span class="fa fa-angle-double-left fa-lg" aria-hidden="true"></span>
-<!--       <span class="navbar-toggler-icon"></span> -->
     </button>
+<!-- Big ben icon div -->
     <div class="svg-holder">
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
    viewBox="0 0 502.4 502.4" style="enable-background:new 0 0 502.4 502.4;" xml:space="preserve">
@@ -228,12 +228,13 @@
 
   <div class="container-fluid">
     <div class="row">
-      <nav class="col-md-3 bg-dark" id="listBox">
+      <nav class="col-md-3 bg-dark navbar-transparent" id="listBox">
 
 
         <form class="form-inline">
         <input class="form-control col-sm-9" type="text" placeholder="Filter Locations" aria-label="Search" data-bind="textInput: filterText">
-        <button class="btn btn-primary col-sm-3 " type="submit">  Reset </button>
+<!--         <i class="fa fa-refresh" aria-hidden="true"></i> -->
+        <button class="btn btn-primary col-sm-3 btn-manual fa fa-refresh " type="submit"> </button>
       </form>
       <div>
 <h2 data-bind="text: filterText"></h2>
@@ -247,7 +248,7 @@
 
 
 
-    <div id="map" class=" col-md-9"></div>
+    <div id="map" class=" col-md-12"></div>
     </div>
 
 

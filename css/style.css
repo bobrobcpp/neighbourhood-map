@@ -8,13 +8,18 @@ html, body {
   font-family: 'Cinzel', serif;
   }
 
+#title {
+font-size: 2rem;
+ }
+
 #map {
   height: 630px;
   width : 100%;
+  position: absolute;
 }
 
 body {
-  padding-top: 56px;
+  padding-top: 73px;
 }
 
 ul {
@@ -58,6 +63,17 @@ i {
 .svg-holder {
   box-sizing: inherit;
   display: inline-block;
-  height: 50px;
-  width: 50px;
+  height: 58px;
+  width: 58px;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.btn-manual {
+  overflow: hidden;
+}
+
+.navbar-transparent {
+    z-index: 100;
+     background: rgba(0,0,0,0.4);
 }
