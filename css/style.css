@@ -9,7 +9,7 @@ html, body {
   }
 
 #title {
-font-size: 2rem;
+font-size: 1.5rem;
  }
 
 #map {
@@ -35,9 +35,9 @@ h4{
 }
 
 #info-window {
-  font-size: 1em;
+  font-size: 0.7em;
     font-family: 'Cinzel', serif;
-    max-width: 190px;
+    max-width: 120px;
 }
 #info-title {
   max-width: 350px;
@@ -101,3 +101,14 @@ footer{
 #info-container {
   display: flex;
 }
+
+@media (min-width: 450px){
+  #title {
+    font-size: 2rem;
+  }
+  #info-window {
+  font-size: 1em;
+    max-width: 190px;
+}
+}
+

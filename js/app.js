@@ -35,7 +35,7 @@ var viewModel =function (){
     data.response.group.results.forEach(function(loc){
       console.log(loc.venue.name + ", Latitude: " + loc.venue.location.lat + ", Longitude: " + loc.venue.location.lng);
       this.record = new placeListItem(loc);
-      self.locationList.push({lat: this.record.lat, lng: this.record.lng, name: this.record.name, photo: this.record.photo, rating: this.record.rating, checkins: this.record.checkins, infoContent: this.record.infoContent, formattedAddress: [this.record.formattedAddress], mark: this.record.mark});
+      self.locationList.push({lat: this.record.lat, lng: this.record.lng, name: this.record.name, bigPhoto: this.record.bigPhoto, smallPhoto: this.record.smallPhoto, rating: this.record.rating, checkins: this.record.checkins, infoContent: this.record.infoContent, formattedAddress: [this.record.formattedAddress], mark: this.record.mark});
     });
     self.locationList().forEach(function(rec){
       dataModel.locations.push(rec);
@@ -69,7 +69,8 @@ var placeListItem = function(data){
   self.formattedAddress = ko.observableArray([data.venue.location.formattedAddress]);
   self.rating = ko.observable(data.venue.rating);
   self.checkins = ko.observable(data.venue.stats.checkinsCount);
-  self.photo = data.photo.prefix + "200x200" + data.photo.suffix;
+  self.bigPhoto = data.photo.prefix + "200x200" + data.photo.suffix;
+  self.smallPhoto = data.photo.prefix + "100x100" + data.photo.suffix;
   var theLatLng = new google.maps.LatLng(self.lat(), self.lng());
 
   self.mark = new google.maps.Marker({
@@ -99,7 +100,9 @@ var placeListItem = function(data){
 
     contentString += ("</p><p> <i class='fa fa-star info-icon' aria-hidden='true'></i> " + self.rating() + "/10<br></p>" );
     contentString += ("<p> <i class='fa fa-child info-icon' aria-hidden='true'></i>" + self.checkins() + " total checkins </p></div>");
-    contentString += ("<img class='info-img' src='" + self.photo + "''></div>");
+    contentString += ("<picture class='info-img'><source srcset='" + self.bigPhoto + "' media='(min-width: 500px)'><img srcset='" + self.smallPhoto + "'></picture></div>");
+
+
     contentString += "<p> Data sourced from <a href='https://developer.foursquare.com/'>Foursquare API </a></div>";
     return contentString;
   };
