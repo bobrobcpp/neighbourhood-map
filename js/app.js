@@ -34,8 +34,8 @@ var viewModel =function (){
     console.log(self.bigUrl);
     data.response.group.results.forEach(function(loc){
       console.log(loc.venue.name + ", Latitude: " + loc.venue.location.lat + ", Longitude: " + loc.venue.location.lng);
-      this.record = new placeListItem(loc.venue);
-      self.locationList.push({lat: this.record.lat, lng: this.record.lng, name: this.record.name, rating: this.record.rating, infoContent: this.record.infoContent, formattedAddress: [this.record.formattedAddress], mark: this.record.mark});
+      this.record = new placeListItem(loc);
+      self.locationList.push({lat: this.record.lat, lng: this.record.lng, name: this.record.name, photo: this.record.photo, rating: this.record.rating, checkins: this.record.checkins, infoContent: this.record.infoContent, formattedAddress: [this.record.formattedAddress], mark: this.record.mark});
     });
     self.locationList().forEach(function(rec){
       dataModel.locations.push(rec);
@@ -63,12 +63,13 @@ var viewModel =function (){
 var placeListItem = function(data){
   // var infowindow = new google.maps.InfoWindow();
   var self = this;
-  self.lat = ko.observable(data.location.lat);
-  self.lng = ko.observable(data.location.lng);
-  self.name = ko.observable(data.name);
-  self.formattedAddress = ko.observableArray([data.location.formattedAddress]);
-  self.rating = ko.observable(data.rating);
-  self.checkins = ko.observable(data.stats.checkinsCount);
+  self.lat = ko.observable(data.venue.location.lat);
+  self.lng = ko.observable(data.venue.location.lng);
+  self.name = ko.observable(data.venue.name);
+  self.formattedAddress = ko.observableArray([data.venue.location.formattedAddress]);
+  self.rating = ko.observable(data.venue.rating);
+  self.checkins = ko.observable(data.venue.stats.checkinsCount);
+  self.photo = data.photo.prefix + "200x200" + data.photo.suffix;
   var theLatLng = new google.maps.LatLng(self.lat(), self.lng());
 
   self.mark = new google.maps.Marker({
@@ -91,11 +92,15 @@ var placeListItem = function(data){
           }
         });
   self.infoContent = function() {
-    var contentString = "<h4>" + (self.name()).toString() + "</h4><br><h5> Address: </h5><div id='info-window'>";
+    var contentString = "<div id='info-title'><h4>" + (self.name()).toString() + "</h4></div><div id='info-container'><br> <div id='info-window'><p><i class='fa fa-home info-icon' aria-hidden='true'> </i>";
     for (i = 0; i < self.formattedAddress()[0].length; i ++){
-      contentString += ("<p>" + self.formattedAddress()[0][i] + "<br> </p>");
+      contentString += ( self.formattedAddress()[0][i] + ", <br />");
     }
-    contentString += "</div>";
+
+    contentString += ("</p><p> <i class='fa fa-star info-icon' aria-hidden='true'></i> " + self.rating() + "/10<br></p>" );
+    contentString += ("<p> <i class='fa fa-child info-icon' aria-hidden='true'></i>" + self.checkins() + " total checkins </p></div>");
+    contentString += ("<img class='info-img' src='" + self.photo + "''></div>");
+    contentString += "<p> Data sourced from <a href='https://developer.foursquare.com/'>Foursquare API </a></div>";
     return contentString;
   };
 

@@ -15,7 +15,6 @@ font-size: 2rem;
 #map {
   height: 630px;
   width : 100%;
-  position: absolute;
 }
 
 body {
@@ -26,8 +25,22 @@ ul {
   color: white;
 }
 
+.info-img{
+  padding-left: 5px;
+  border-radius: 15px 50px;
+}
+
+h4{
+  font-family: 'Cinzel', serif;
+}
+
 #info-window {
   font-size: 1em;
+    font-family: 'Cinzel', serif;
+    max-width: 190px;
+}
+#info-title {
+  max-width: 350px;
 }
 
 h4 {
@@ -73,7 +86,18 @@ i {
   overflow: hidden;
 }
 
-.navbar-transparent {
+.navbar-overlay {
     z-index: 100;
-     background: rgba(0,0,0,0.4);
+}
+
+footer{
+  z-index: 999;
+}
+
+.info-icon {
+  color: black;
+}
+
+#info-container {
+  display: flex;
 }
