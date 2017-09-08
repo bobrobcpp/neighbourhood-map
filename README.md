@@ -9,11 +9,11 @@ Clicking the list items or the associated marker will open a google maps infoWin
 Simply clone the project and open index.html to view the application.
 
 ## Resources
-..*Google Maps API
-..*Foursquare API
-..*jQuery
-..*KnockoutJS
-..*Bootstrap
+*Google Maps API
+*Foursquare API
+*jQuery
+*KnockoutJS
+*Bootstrap
 
 
 
