@@ -76,7 +76,7 @@ var placeListItem = function(data){
   self.mark = new google.maps.Marker({
           position: theLatLng,
           map: map,
-          draggable: true,
+          draggable: false,
           // label: (index+1).toString(),
           animation: null,
           toggleBounce: function() {
@@ -100,10 +100,10 @@ var placeListItem = function(data){
 
     contentString += ("</p><p> <i class='fa fa-star info-icon' aria-hidden='true'></i> " + self.rating() + "/10<br></p>" );
     contentString += ("<p> <i class='fa fa-child info-icon' aria-hidden='true'></i>" + self.checkins() + " total checkins </p></div>");
-    contentString += ("<picture class='info-img'><source srcset='" + self.bigPhoto + "' media='(min-width: 500px)'><img srcset='" + self.smallPhoto + "'></picture></div>");
+    contentString += ("<picture class='info-img'><source srcset='" + self.bigPhoto + "' media='(min-width: 500px)'><img class='info-img' srcset='" + self.smallPhoto + "'></picture></div>");
 
 
-    contentString += "<p> Data sourced from <a href='https://developer.foursquare.com/'>Foursquare API </a></div>";
+    contentString += "<p> Data sourced from <a href='https://developer.foursquare.com/'> <i class='fa fa-foursquare fa-2x' aria-hidden='true'></i> Foursquare API </a></div>";
     return contentString;
   };
 
@@ -132,10 +132,17 @@ var infowindow;
     if(infowindow){
       infowindow.close();
     }
+    if(($(window).width() - $("#form-list").width()) < 500) {
+      listHide();
+    }
+
     infowindow = new google.maps.InfoWindow();
     infowindow.setContent(data.infoContent());
     infowindow.open(map, data.mark);
     data.mark.toggleBounce();
+
+    map.panTo(data.mark.getPosition());
+
 }
 
   function placeMarker(locations) {

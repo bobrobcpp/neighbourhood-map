@@ -65,11 +65,11 @@ li:hover {
 }
 
 i {
-  color: white;
+  color: black;
   padding:5px;
 }
 
-.fa{
+#arrows {
   color: white;
 }
 
