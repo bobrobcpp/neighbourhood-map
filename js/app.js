@@ -85,6 +85,7 @@ var placeListItem = function(data){
             }
           }
         });
+
   //Compose the contents of each infoWindow with the properties of the location
   self.infoContent = function() {
     var contentString = "<div id='info-title'><h4>" + (self.name()).toString() + "</h4></div><div id='info-container'><br> <div id='info-window'><p><i class='fa fa-home info-icon' aria-hidden='true'> </i>";
