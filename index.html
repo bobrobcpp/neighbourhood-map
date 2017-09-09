@@ -6,25 +6,23 @@
     <meta name="author" content="Robert King">
 
     <title>Neighbourhod Map Project</title>
-
+<!-- Link to css, bootstrap for page styling, google fonts, knockoutJS for viewModel, fontawesome for icons -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
-
     <script type="text/javascript" src="js/libs/knockout-3.4.2.js"></script>
     <script src="https://use.fontawesome.com/76784e4ab9.js"></script>
-
   </head>
 
   <body>
-
+<!-- Bootstrap Navbar -->
     <nav class="navbar fixed-top navbar-expand navbar-dark bg-dark">
-
       <a class="navbar-brand" id="title" href="#">Explore London</a>
-     <button class="navbar-toggle bg-dark justify-content-end" type="button" aria-expanded="false" aria-label="Toggle navigation" onclick="listHide()">
+      <!-- TODO: Add transition effect to sidebar toggle using data-toggle and data-target -->
+     <button class="navbar-toggle bg-dark justify-content-end"  type="button" aria-expanded="false" aria-label="Toggle navigation" onclick="listHide()">
      <span id="arrows" class="fa fa-chevron-down fa-lg" aria-hidden="true"></span>
     </button>
-<!-- Big ben icon div -->
+<!-- Big ben icon div as inline SVG in the navbar-->
     <div class="svg-holder">
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
    viewBox="0 0 502.4 502.4" style="enable-background:new 0 0 502.4 502.4;" xml:space="preserve">
@@ -223,21 +221,21 @@
 </svg>
     </div>
     </nav>
+<!-- End of Big Ben SVG -->
+<!-- End of navbar -->
 
-
-
-  <div class="container-fluid">
+<!-- Main content container -->
+  <main class="container-fluid">
     <div class="row">
+    <!-- Filter form and Location list sidebar -->
       <nav class="col-md-3 bg-dark navbar-overlay" id="listBox">
-
-
+      <!-- Filter form -->
         <form class="form-inline">
         <input class="form-control col-sm-9" type="text" placeholder="Filter Locations" aria-label="Search" data-bind="textInput: filterText">
-<!--         <i class="fa fa-refresh" aria-hidden="true"></i> -->
         <button class="btn btn-primary col-sm-3 btn-manual fa fa-refresh " type="submit"> </button>
       </form>
+      <!-- Location List -->
       <div>
-      <h2 data-bind="text: filterText"></h2>
        <ul id="form-list" data-bind="foreach: $root.filteredList">
           <li data-bind= "click: showInfo">
               <b data-bind="text: name()"></b>
@@ -246,23 +244,21 @@
       </div>
       </nav>
 
-
-
+<!-- Google map  -->
     <div id="map" class=" col-md-9"></div>
     </div>
+    </main>
 
 
-    </div>
-
-
-
+<!-- Async loading of google maps, jquery/popper dependency, bootstrap and app.js loaded at end -->
     <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXLnpNdep16oWXr8v2lbLeoCoYPId2lyo&callback=initMap"onerror="googleError()"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-
   </body>
+
+  <!-- Attributions in footer -->
   <footer>
   <div>Big Ben icon made by <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
   <div> All generated recommendations and related metadata powered by <a href='https://developer.foursquare.com/'>Foursquare </a></div>
