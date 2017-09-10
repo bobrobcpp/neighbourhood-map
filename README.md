@@ -6,14 +6,16 @@ A KnockoutJS view-model is used to handle the population of an interactive list 
 Clicking the list items or the associated marker will open a google maps infoWindow with information on the location (address, rating, checkinCount, photo) retrieved from the initial XHR data.
 
 ## Running the application
-Simply clone the project and open index.html to view the application.
+Simply clone the project and open index.html from within the dist directory to view the application.
 
-## Resources
-*Google Maps API
-*Foursquare API
-*jQuery
-*KnockoutJS
-*Bootstrap
+## Resources and attributions
+* Google Maps API
+* Foursquare API
+* jQuery
+* KnockoutJS
+* Bootstrap
+* Icons by font awesome
+* SVG of Big ben used in navbar from Roundicons at https://www.flaticon.com/authors/roundicons
 
 
 
