@@ -1,0 +1,28 @@
+{
+  "name": "neighbourhood-map",
+  "version": "1.0.0",
+  "description": "This project has been created to fulfill requirements for the Udacity Front-End Developer Nanodegree.\r It utilises an embedded google map centred on London.\r An AJAX request to Foursquare API is used to gather a list of 10 recommended historic sites in the vicinity which are located on the map with google map markers.\r A KnockoutJS view-model is used to handle the population of an interactive list sidebar with the site locations.\r Clicking the list items or the associated marker will open a google maps infoWindow with information on the location (address, rating, checkinCount, photo) retrieved from the initial XHR data.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-jsmin": "^0.1.5"
+  },
+  "devDependencies": {
+    "gulp-clean-css": "^3.8.0",
+    "gulp-replace": "^0.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bobrobcpp/neighbourhood-map.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bobrobcpp/neighbourhood-map/issues"
+  },
+  "homepage": "https://github.com/bobrobcpp/neighbourhood-map#readme"
+}

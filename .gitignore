@@ -1,2 +1,5 @@
 temp.html
 config.txt
+.jshintrc
+node_modules
+safe

@@ -4,19 +4,18 @@ html, body {
   padding: 0;
 }
 
-  nav {
+nav {
   font-family: 'Cinzel', serif;
-  }
+}
 
 #title {
-font-size: 1.5rem;
- }
+  font-size: 1.5rem;
+}
 
 #map {
   height: 100vh;
-/*  height: 630px;
-*/  width : 100%;
-flex:1;
+  width: 100%;
+  flex: 1;
 }
 
 .row {
@@ -24,29 +23,29 @@ flex:1;
   overflow: hidden;
 }
 
-
 body {
   padding-top: 73px;
 }
 
 ul {
-  color: white;
+  color: #fff;
 }
 
-.info-img{
+.info-img {
   padding-left: 5px;
   border-radius: 15px 50px;
 }
 
-h4{
+h4 {
   font-family: 'Cinzel', serif;
 }
 
 #info-window {
   font-size: 0.7em;
-    font-family: 'Cinzel', serif;
-    max-width: 120px;
+  font-family: 'Cinzel', serif;
+  max-width: 120px;
 }
+
 #info-title {
   max-width: 350px;
 }
@@ -69,16 +68,16 @@ li {
 }
 
 li:hover {
-  background-color: gray;
+  background-color: #888;
 }
 
 i {
-  color: black;
-  padding:5px;
+  color: #000;
+  padding: 5px;
 }
 
 #arrows {
-  color: white;
+  color: #fff;
 }
 
 .svg-holder {
@@ -95,36 +94,37 @@ i {
 }
 
 .navbar-overlay {
-    z-index: 100;
+  z-index: 100;
 }
 
 main {
   height: 100%;
 }
+
 #listBox {
   height: 100%;
 }
 
-footer{
+footer {
   z-index: 999;
 }
 
 .info-icon {
-  color: black;
+  color: #000;
 }
-
 
 #info-container {
   display: flex;
 }
 
-@media (min-width: 450px){
+@media (min-width: 450px) {
   #title {
     font-size: 2rem;
   }
+
   #info-window {
-  font-size: 1em;
+    font-size: 1em;
     max-width: 190px;
-}
+  }
 }
 
