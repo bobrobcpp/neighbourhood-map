@@ -9,7 +9,7 @@ Clicking the list items or the associated marker will open a google maps infoWin
 Simply clone the project and open index.html from within the dist directory to view the application.
 
 ## Utilising Gulp Build Tool
-Gulp was used to minify files and move the final project from the src into a dist.  Manually delete all files from the dist folder and then run 'gulp' to recreate project files into the dist folder once again.
+Gulp was used to minify files and move the final project from the src into a dist. First make sure you run 'npm i' from within the project folder to install the required node module dependencies. Manually delete all files from the dist folder and then run 'gulp' to recreate project files into the dist folder once again.
 
 ## Resources and attributions
 * Google Maps API

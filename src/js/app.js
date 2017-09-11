@@ -4,8 +4,8 @@ const dataModel = {
 };
 
 
-// KnockoutJs viewModel
-const viewModel = function() {
+// KnockoutJs ViewModel
+const ViewModel = function() {
     const self = this;
     //Declare filtered list to display
     self.filterText = ko.observable("");
@@ -31,7 +31,7 @@ const viewModel = function() {
     $.getJSON(self.bigUrl, function(data) {
             //If AJAX request is succesful....
             data.response.group.results.forEach(function(loc) {
-                this.record = new placeListItem(loc);
+                this.record = new PlaceListItem(loc);
                 self.locationList.push({
                     lat: this.record.lat,
                     lng: this.record.lng,
@@ -61,11 +61,11 @@ const viewModel = function() {
 
 
     self.currentItem = ko.observable(self.locationList()[0]);
-    //end of viewModel
+    //end of ViewModel
 };
 
-// Structure of placeListItem with all the data properties for each location
-const placeListItem = function(data) {
+// Structure of PlaceListItem with all the data properties for each location
+const PlaceListItem = function(data) {
     const self = this;
     self.lat = data.venue.location.lat;
     self.lng = data.venue.location.lng;
@@ -90,7 +90,7 @@ const placeListItem = function(data) {
                 this.setAnimation(google.maps.Animation.BOUNCE);
                 setTimeout(function() {
                     that.setAnimation(null);
-                }, 2000);
+                }, 1400);
             }
         }
     });
@@ -110,10 +110,10 @@ const placeListItem = function(data) {
         contentString += "<p> Data sourced from <a href='https://developer.foursquare.com/'> <i class='fa fa-foursquare fa-2x' aria-hidden='true'></i> Foursquare API </a></div>";
         return contentString;
     };
-    //End of placeListItem definition
+    //End of PlaceListItem definition
 };
 // Neccessary for knockout JS bindings
-ko.applyBindings(new viewModel());
+ko.applyBindings(new ViewModel());
 
 
 
@@ -164,6 +164,9 @@ function placeMarker(locations) {
     });
     //Scale the ap to the boundary parameters
     map.fitBounds(latlngbounds);
+    google.maps.event.addDomListener(window, 'resize', function() {
+        map.fitBounds(latlngbounds);
+    });
 }
 // end of google maps code
 
